@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 100 100">
+  <defs>
+    <!-- 渐变定义 -->
+    <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE5D9" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#FF8C66" stop-opacity="0"/>
+    </radialGradient>
+    
+    <!-- 光芒滤镜 -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+      <feColorMatrix in="blur" type="saturate" values="2" result="saturated"/>
+      <feBlend in="SourceGraphic" in2="saturated" mode="screen"/>
+    </filter>
+  </defs>
+
+  <!-- 背景光晕 -->
+  <circle cx="50" cy="50" r="20" fill="url(#centerGlow)" opacity="0.7"/>
+
+  <!-- 主烟花图案 -->
+  <g filter="url(#glow)" fill="#FFF">
+    <!-- 中心点 -->
+    <circle cx="50" cy="50" r="3" fill="#FFE5D9"/>
+    
+    <!-- 主要光芒 -->
+    <g transform="translate(50 50)">
+      <path d="M0,-25 L0,-5 M0,5 L0,25 M-25,0 L-5,0 M5,0 L25,0" 
+            stroke="#FFB299" stroke-width="3" stroke-linecap="round"/>
+      <path d="M-18,-18 L-4,-4 M4,4 L18,18 M-18,18 L-4,4 M4,-4 L18,-18" 
+            stroke="#FF8C66" stroke-width="2" stroke-linecap="round"/>
+    </g>
+
+    <!-- 装饰星点 -->
+    <g transform="translate(50 50)">
+      <circle cx="22" cy="0" r="2" fill="#FFE5D9"/>
+      <circle cx="-22" cy="0" r="2" fill="#FFE5D9"/>
+      <circle cx="0" cy="22" r="2" fill="#FFE5D9"/>
+      <circle cx="0" cy="-22" r="2" fill="#FFE5D9"/>
+      <circle cx="15" cy="15" r="1.5" fill="#FFB299"/>
+      <circle cx="-15" cy="15" r="1.5" fill="#FFB299"/>
+      <circle cx="15" cy="-15" r="1.5" fill="#FFB299"/>
+      <circle cx="-15" cy="-15" r="1.5" fill="#FFB299"/>
+    </g>
+  </g>
+
+  <!-- 动画定义 -->
+  <style>
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+    g { animation: pulse 2s ease-in-out infinite; }
+  </style>
+</svg>
